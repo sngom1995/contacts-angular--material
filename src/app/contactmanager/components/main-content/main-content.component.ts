@@ -18,7 +18,11 @@ export class MainContentComponent implements OnInit, OnChanges{
     ngOnInit(): void {
       this.route.params.subscribe(
         params => {
-          this.user = this.userService.loadById(+params['id']);
+          this.userService.users.subscribe(data => {
+            if (data.length==0) return;
+              this.user = this.userService.loadById(+params['id']);
+          }
+          );
           console.log(this.user);
         }
       );
